@@ -40,11 +40,18 @@ class NotLongEnough(Error):
 
 
 class NoneType(Error):
-    def __init__(self, operation, variable_name, variable):
-        self.message = f"Cannot {operation} when {variable_name} is '{variable}'."
+    def __init__(self, operation, variable_name):
+        self.message = f"Cannot {operation} when {variable_name} is 'None'."
         super().__init__(self.message)
 
 
 class CouldNotConnectVC(Error):
     def __init__(self):
         self.message = f'Cannot connect to voice chat.'
+
+
+class SentEmptyMessage(Error):
+    def __init__(self, message_sender: str, message_contents:str):
+        message = f'{message_sender} tried to send: \"{message_contents}\" (empty message?)'
+        to_user = 'Huh? Did you send an empty message?'
+        super().__init__(message, to_user)
